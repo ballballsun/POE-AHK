@@ -1,4 +1,4 @@
-global _msgStop := "¤â°Ê¤¤¤î¸}¥»"
+global _msgStop := "æ‰‹å‹•ä¸­æ­¢è…³æœ¬"
 
 
 Loop, %0%  
@@ -17,23 +17,36 @@ if not A_IsAdmin
     ExitApp
 }
 
-; ³]©wÄ²µo¼öÁäalt+d (https://autohotkey.com/docs/Hotkeys.htm)
+;#####################################################################################
+;#####################################################################################
+; Alt+D
+;
+;#####################################################################################
+; è¨­å®šè§¸ç™¼ç†±éµalt+d (https://autohotkey.com/docs/Hotkeys.htm)
 !d::
 IfWinnotActive,Path of Exile
 {
-	MsgBox,½Ğ½T»{µøµ¡¤w»EµJ¦bPOE¤W!
-	return
+  MsgBox,è«‹ç¢ºèªè¦–çª—å·²èšç„¦åœ¨POEä¸Š!
+  return
 }
+TrayTip AHK, "åœ°é›·è…³æœ¬å•Ÿå‹•"
+ToolTip, AHK,940,400
 loop
 {
-	; ªø«öF12µ²§ô
-	if GetKeyState("F12", "P") 
-	{
-		MsgBox, %_msgStop%
-		break
-	}
-	Send {d}
-	; ¬Û¹j200-500²@¬í¦A«ö
-	Random, rand, 200, 500
-	Sleep, %rand%
+  ; é•·æŒ‰F12çµæŸ
+  if GetKeyState("F12", "P") 
+  {
+    ;MsgBox, %_msgStop%
+    TrayTip AHK, %_msgStop%
+    SetTimer, RemoveToolTip, -5000
+    break
+  }
+  Send {d}
+  ; ç›¸éš”200-500æ¯«ç§’å†æŒ‰
+  Random, rand, 200, 500
+  Sleep, %rand%
 }
+
+RemoveToolTip:
+ToolTip
+return
